@@ -49,30 +49,30 @@ def format_qa_pairs(qa_pairs: list) -> str:
 
 
 
-def parse_questions(raw_text: str) -> dict:
-    categories = {
-        "Technical": [],
-        "Behavioral": [],
-        "Situational": []
-    }
+# def parse_questions(raw_text: str) -> dict:
+#     categories = {
+#         "Technical": [],
+#         "Behavioral": [],
+#         "Situational": []
+#     }
 
-    current_category = None
+#     current_category = None
 
-    for line in raw_text.strip().split("\n"):
-        line = line.strip()
+#     for line in raw_text.strip().split("\n"):
+#         line = line.strip()
 
-        if not line:
-            continue
+#         if not line:
+#             continue
 
-        if "TECHNICAL" in line.upper() and ":" in line:
-            current_category = "Technical"
-        elif "BEHAVIORAL" in line.upper() and ":" in line:
-            current_category = "Behavioral"
-        elif "SITUATIONAL" in line.upper() and ":" in line:
-            current_category = "Situational"
-        elif current_category and line[0].isdigit() and "." in line:
-            question = line.split(".", 1)[1].strip()
-            if question:
-                categories[current_category].append(question)
+#         if "TECHNICAL" in line.upper() and ":" in line:
+#             current_category = "Technical"
+#         elif "BEHAVIORAL" in line.upper() and ":" in line:
+#             current_category = "Behavioral"
+#         elif "SITUATIONAL" in line.upper() and ":" in line:
+#             current_category = "Situational"
+#         elif current_category and line[0].isdigit() and "." in line:
+#             question = line.split(".", 1)[1].strip()
+#             if question:
+#                 categories[current_category].append(question)
 
-    return categories
+#     return categories

@@ -1,43 +1,45 @@
 QUESTION_GENERATION_PROMPT = """
 You are an expert technical interviewer.
 
-Generate exactly 15 interview questions for a candidate with the following profile:
+Generate exactly 15 interview questions based on the following job description:
 
-- Job Description: {job_description}
+{job_description}
 
-Generate questions in this exact format — nothing else, no extra text:
+IMPORTANT RULES:
+- Technical section must have exactly 7 questions:
+  - First 2 must be TEXTUAL (theoretical/conceptual questions)
+  - Last 5 must be PROGRAMMATIC (coding problems to solve)
+- Behavioral section must have exactly 4 questions (all textual)
+- Situational section must have exactly 4 questions (all textual)
+- Behavioral questions must start with "Tell me about a time..."
+- Situational questions must start with "What would you do if..."
+- For PROGRAMMATIC questions, give a clear coding problem to solve
+- Generate questions relevant to the job description
+
+Generate in this EXACT format — nothing else, no extra text:
 
 TECHNICAL:
-1. [question]
-2. [question]
-3. [question]
-4. [question]
-5. [question]
+1. [TEXTUAL] question here
+2. [TEXTUAL] question here
+3. [PROGRAMMATIC] coding problem here
+4. [PROGRAMMATIC] coding problem here
+5. [PROGRAMMATIC] coding problem here
+6. [PROGRAMMATIC] coding problem here
+7. [PROGRAMMATIC] coding problem here
 
 BEHAVIORAL:
-1. [question]
-2. [question]
-3. [question]
-4. [question]
-5. [question]
+1. [TEXTUAL] question here
+2. [TEXTUAL] question here
+3. [TEXTUAL] question here
+4. [TEXTUAL] question here
 
 SITUATIONAL:
-1. [question]
-2. [question]
-3. [question]
-4. [question]
-5. [question]
-
-Make questions relevant to the domain and appropriate for the experience level.
+1. [TEXTUAL] question here
+2. [TEXTUAL] question here
+3. [TEXTUAL] question here
+4. [TEXTUAL] question here
 """
 
-# Technical questions should test real knowledge.
-# Behavioral questions should start with "Tell me about a time..."
-# Situational questions should start with "What would you do if..."
-
-
-# - Domain/Role: {domain}
-# - Experience Level: {experience}
 
 EVALUATION_PROMPT = """
 You are a strict but fair interview evaluator.
@@ -55,8 +57,6 @@ You MUST respond with ONLY a valid JSON object.
 Do NOT include any text before or after the JSON.
 Do NOT use markdown, backticks, or code fences.
 Start your response directly with {{ and end with }}
-
-Use this exact JSON structure:
 
 {{
   "overall_score": 75,
@@ -95,27 +95,18 @@ Use this exact JSON structure:
 """
 
 
-# - Domain/Role: {domain}
-# - Experience Level: {experience}
-
 TERMINATION_EVALUATION_PROMPT = """
 You are a strict interview evaluator.
 
 A candidate was taking an interview for the following role:
-
 - Job Description: {job_description}
 
-However, the interview was terminated early due to the following reason:
+The interview was terminated early due to:
 {termination_reason}
 
-Based ONLY on this termination reason, evaluate the candidate.
-Do NOT make up scores for questions that were never answered.
-Give an overall score of 0 and reflect the termination in your summary.
+Give overall_score of 0 and reflect termination in summary.
 
-You MUST respond with ONLY a valid JSON object.
-Do NOT include any text before or after the JSON.
-Do NOT use markdown, backticks, or code fences.
-Start your response directly with {{ and end with }}
+You MUST respond with ONLY a valid JSON object. No markdown, no backticks.
 
 {{
   "overall_score": 0,
@@ -138,18 +129,6 @@ Start your response directly with {{ and end with }}
   "question_feedback": []
 }}
 """
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
