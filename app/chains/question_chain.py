@@ -6,7 +6,7 @@ from app.prompts.prompts import QUESTION_GENERATION_PROMPT
 
 def generate_questions(job_description: str, api_key: str) -> dict:
     llm = ChatGoogleGenerativeAI(
-        model=os.getenv("GEMINI_MODEL", "gemini-2.0-flash"),
+        model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
         google_api_key=api_key,
         temperature=0.7
     )
